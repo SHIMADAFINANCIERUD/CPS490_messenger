@@ -1,8 +1,8 @@
 # Messenger — Statement of Work
 
-Course: CPS 490 — Capstone I
+- Course: CPS 490 — Capstone I
 
-Assignment: IA 02 — Messenger: Statement of Work
+- Assignment: IA 02 — Messenger: Statement of Work
 
 
 
@@ -167,35 +167,38 @@ If an assumption is incorrect, I will review its effect on the scope and schedul
 The chart below shows the planned work and its order. Task durations use calendar days, including weekends. Milestones mark when the preceding work should be ready.
 
 ```mermaid
+%%{init: {"gantt": {"useMaxWidth": false, "useWidth": 1200, "leftPadding": 140, "rightPadding": 180, "barHeight": 22, "barGap": 12, "fontSize": 14, "sectionFontSize": 14}}}%%
 gantt
     title Messenger Project Schedule
     dateFormat YYYY-MM-DD
     axisFormat %m/%d
+    tickInterval 3day
+    todayMarker off
 
     section Planning
-    Write SOW and schedule           :sow, 2026-10-04, 7d
-    SOW ready for review             :milestone, sow_ready, 2026-10-11, 0d
-    Submit IA02                      :milestone, ia02, 2026-10-12, 0d
-    Basic application design         :design, after sow, 2d
+    SOW and schedule    :sow, 2026-10-04, 7d
+    SOW ready           :milestone, sow_ready, 2026-10-11, 0d
+    Submit IA02         :milestone, ia02, 2026-10-12, 0d
+    Basic design        :design, after sow, 2d
 
     section Development
-    Registration, login, and logout  :accounts, after design, 3d
-    User lookup and private messages :private_chat, after accounts, 3d
-    Group creation and messaging     :groups, after private_chat, 3d
-    Access controls and interface    :access, after groups, 2d
-    Required features ready          :milestone, features_ready, after access, 0d
+    Accounts            :accounts, after design, 3d
+    Private messages    :private_chat, after accounts, 3d
+    Group chat          :groups, after private_chat, 3d
+    Access and interface :access, after groups, 2d
+    Features ready      :milestone, features_ready, after access, 0d
 
-    section Verification
-    Integration and feature testing  :testing, after access, 3d
-    Fix issues, retest, finish report :fixes, after testing, 2d
+    section Testing
+    Integration tests   :testing, after access, 3d
+    Fixes and report    :fixes, after testing, 2d
 
-    section Documentation
-    Prepare setup and user guide     :guide, 2026-10-13, 16d
+    section Documents
+    Setup and user guide :guide, 2026-10-13, 16d
 
     section Delivery
-    Final review                     :review, after fixes guide, 1d
-    Planned final delivery           :milestone, delivery, after review, 0d
-    Latest allowed delivery          :milestone, deadline, 2026-11-02, 0d
+    Final review        :review, after fixes guide, 1d
+    Planned delivery    :milestone, delivery, after review, 0d
+    Final deadline      :milestone, deadline, 2026-11-02, 0d
 ```
 
 #### 6.4 Dependencies and Readiness
@@ -211,3 +214,64 @@ gantt
 - The final review depends on completing the required fixes, test report, and setup and user guide.
 
 - Delivery will include the working application, source code, test report, and instructions. Any remaining limitations will be documented.
+
+
+
+
+## 7. Acceptance
+
+The project will be considered complete when the required deliverables meet the checks below.
+
+#### 7.1 Statement of Work and Schedule
+
+- The statement of work covers the project purpose, objectives, stakeholders, scope, deliverables, assumptions, constraints, dependencies, schedule, and acceptance criteria.
+
+- The Gantt chart is readable and shows the main tasks, dependencies, milestones, integration, testing, and planned delivery.
+
+- The schedule allows time for fixes and final review before delivery and meets the November 2, 2026 deadline.
+
+#### 7.2 Working Application
+
+The required features will be checked using multiple test accounts:
+
+- A new user can create an account, log in with the correct credentials, and log out. Incorrect credentials are rejected.
+
+- After logging out, the user cannot access conversations without logging in again.
+
+- A registered user can find another user by username and start a private conversation. Both users can send messages and see the messages they receive.
+
+- A third user cannot read or send messages in a private conversation between two other users.
+
+- A user can create a named group and add registered users. At least three group members can exchange text messages.
+
+- A user who is not a group member cannot read or send messages in that group.
+
+- A member can leave a group. After leaving, that user can no longer access the group conversation or send messages to it.
+
+- Users can open their conversations, read incoming messages, and send new messages through the interface.
+
+These checks must pass for the required application features to be accepted.
+
+#### 7.3 Test Report
+
+- The report includes test steps, expected results, actual results, and a pass or fail result for each required feature check.
+
+- Failed checks are recorded. After a fix, the report includes the result of testing the feature again.
+
+- Any remaining problems or limitations are listed clearly. Problems that prevent a required acceptance check from passing must be fixed before delivery.
+
+#### 7.4 Setup and User Guide
+
+- A reviewer can follow the setup instructions to install the required tools, configure the application, and start it.
+
+- The user guide explains registration, login, logout, private messaging, group creation, adding members, and leaving a group.
+
+- The instructions are checked against the delivered version of the application.
+
+#### 7.5 Final Delivery Review
+
+- The source code, required application files, test report, and setup and user guide are committed and pushed to the course GitHub repository.
+
+- The delivered version matches the version used for the final test results.
+
+- Message history across login sessions and message search are optional and are not required for acceptance.
