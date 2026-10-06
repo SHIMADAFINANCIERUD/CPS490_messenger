@@ -10,11 +10,11 @@
 
 #### 1.1 Purpose
 
-Messenger is an application that lets registered users send private messages to each other and chat in groups 
+Messenger is an application that lets registered users send private messages to each other and chat in groups.
 
 For the first version, I plan to implement basic features such as account registration and login, private messaging, and group chat.
 
-Consider advanced features such as viewing message history and message search.
+Message history across login sessions and message search are optional features for later.
 
 #### 1.2 Objectives
 
@@ -24,7 +24,7 @@ Consider advanced features such as viewing message history and message search.
 
 - Allow users to exchange text messages in a group.
 
-- Allow users to view earlier messages in their conversations.
+- Allow users to create a group and add registered users to it.
 
 - Keep conversations accessible only to the users who are part of them.
 
@@ -68,13 +68,26 @@ The first version of Messenger will include the following features:
 
 #### 3.2 Out of Scope
 
-If time permits, include these additional features. These features are not part of the committed deliverables for the first version, nor are they mandatory acceptance criteria.
+The following features are outside the first-version scope:
 
 - Voice calls, video calls, and screen sharing.
 
 - Sending images, videos, or other file attachments.
 
 - Message editing, message deletion, and emoji reactions.
+
+#### 3.3 Optional Features
+
+Message history across login sessions and message search may be considered after the required features pass their acceptance checks. They are not committed deliverables and are not included in the schedule.
+#### 3.4 Planned Running Environment
+
+The first version will run as a local web application on one computer. That computer will run the Messenger server program, and users will access it through a browser using a localhost address.
+
+Private messaging and group chat will be demonstrated using at least three separate browser sessions logged in to different accounts.
+
+After the required software is installed, running and testing the application locally will not require an internet connection or a rented server. The Messenger server program must remain running while users are chatting.
+
+Public hosting and access from other computers are outside the first-version scope. The setup guide will explain how to start the local server, open the application, and prepare separate user sessions.
 
 
 
@@ -94,6 +107,9 @@ A short guide explaining how to set up and run Messenger. It will also explain h
 
 
 
+#### 4.4 Statement of Work and Schedule
+
+This statement of work and its Gantt chart describe the agreed project boundary, planned work, milestones, and acceptance checks. They can be reviewed in the course repository.
 ## 5. Assumptions, Constraints, and Dependencies
 
 #### 5.1 Assumptions
@@ -102,7 +118,7 @@ The following assumptions are used for planning and still need confirmation:
 
 - The first version will be used by a small group for testing and demonstration.
 
-- Users will have a supported device and a network connection.
+- The development computer can run the local server and at least three independent browser sessions. Local messaging will not require an internet connection after setup.
 
 - The person creating a group can add registered users directly. The first version will not require an invitation and approval process.
 
@@ -213,7 +229,7 @@ gantt
 
 - The final review depends on completing the required fixes, test report, and setup and user guide.
 
-- Delivery will include the working application, source code, test report, and instructions. Any remaining limitations will be documented.
+- Delivery will include the working application, source code, project documents, test report, and instructions. Any remaining limitations will be documented.
 
 
 
