@@ -1,0 +1,51 @@
+@startuml
+title Messenger - Simplified Group Message Sequence
+hide footbox
+autonumber
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam maxMessageSize 230
+skinparam ParticipantPadding 20
+skinparam sequenceMessageAlign center
+skinparam sequenceParticipantBackgroundColor #E8F3FC
+
+participant "Sender Browser" as Sender
+participant "Messenger Server" as Server
+database "D1\nMessenger Data" as Data
+participant "Other Group Members\n(open browser sessions)" as Recipients
+
+note over Sender, Recipients
+  Local application on one computer. D1 is a combined logical store.
+  Main requirements: FR-06, FR-14, FR-15, FR-17, NFR-03.
+end note
+
+Sender -> Server : Send group message\n(session, group ID, text)
+Server -> Data : Get sender identity from session\nand current group membership
+Data --> Server : Login and membership information
+
+alt Not logged in OR not a current group member
+  Server --> Sender : Reject: login required or access denied
+  note over Server, Data : Do not store or distribute the message.
+else Logged in AND a current group member
+  Server -> Data : Store message with authenticated\nsender ID and group ID
+  Data --> Server : Accepted message record
+  Server --> Sender : Own message for display
+  Server -> Data : Get other active sessions\nand current members for this group
+  Data --> Server : Authorized recipient information
+  Server -> Recipients : Message for authorized open sessions only
+  Recipients -> Recipients : Display sender and message text
+end
+
+note over Server, Recipients
+  Recipient filtering also checks login and current membership.
+  Other users and former members receive no group content.
+  Delivery transport and repeated requests are omitted at this level.
+end note
+
+note over Sender, Recipients
+  Accepted does not mean read. Offline delivery is unresolved (IA03 Q-03).
+  Timing and reliability targets still require testing.
+end note
+@enduml

@@ -1,0 +1,47 @@
+@startuml
+title Messenger - Simplified Data Flow Diagram
+left to right direction
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam nodesep 55
+skinparam ranksep 75
+skinparam ArrowColor #40556B
+skinparam rectangleBackgroundColor #F1F5F9
+skinparam usecaseBackgroundColor #E8F3FC
+skinparam databaseBackgroundColor #FFF5D6
+
+rectangle "User\n(visitor or logged in)" as User
+
+rectangle "Messenger" {
+  together {
+    usecase "P1\nAccounts and Sessions" as P1
+    usecase "P2\nConversations and Groups" as P2
+    usecase "P3\nMessages" as P3
+  }
+  database "D1 - Messenger Data\nAccounts and sessions\nConversations and members\nTemporary messages" as Data
+}
+
+User --> P1 : Registration, login, logout,\nor username lookup data
+P1 --> User : Account / session /\nlookup result
+Data --> P1 : Account and session records
+P1 --> Data : New accounts (hashed passwords)\nand session changes
+
+User --> P2 : Session, conversation details,\nmember changes, list query
+P2 --> User : Conversation list /\nmanagement result
+Data --> P2 : Users, sessions,\nconversations and members
+P2 --> Data : New conversations /\nupdated membership
+
+User --> P3 : Session, conversation ID,\nmessage text / read request
+P3 --> User : Authorized messages /\naccess-denied result
+Data --> P3 : Sessions, members,\nand current messages
+P3 --> Data : Authorized new messages
+
+legend bottom
+  Rectangles: users / boundary. Ovals: processes. Cylinder: data store.
+  Arrows show data, not execution order. User includes senders and recipients.
+  P2/P3 check login and permissions. D1 combines logical data for readability.
+  Sessions and messages are temporary. Other restart persistence: IA03 Q-04.
+endlegend
+@enduml
